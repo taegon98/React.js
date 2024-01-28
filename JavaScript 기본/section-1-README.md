@@ -1,10 +1,3 @@
-### React.js 개인 공부 레포지토리 입니다.
-
----
-
-<details>
-<summary>1. JavaScript 기본</summary>
-
 - JavaScrip 변수: 자바스크립트는 동적 타입 언어로 변수들이 실행 시간에 그 타입이 결정되고 변경될 수 있다.
 
 - var VS let
@@ -111,4 +104,3 @@
 <br>
 
 - 배열 메서드 정리 [Click](/JavaScript%20기본/JavaScript_Array_Methods_README.md)
-</details>
