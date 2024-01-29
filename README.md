@@ -1,6 +1,5 @@
-### React.js 개인 공부 레포지토리 입니다.
+## React.js 개인 공부 레포지토리 입니다.
 
----
 
 <details>
 <summary>1. JavaScript 기본</summary>
