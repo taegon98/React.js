@@ -53,4 +53,89 @@
   이는 콜 스택이 해당 함수를 실행하고 바로 다음 작업으로 넘어갈 수 있게 해, 블로킹을 방지한다.
   2. 콜백 큐 (Callback Queue): 비동기 함수의 처리가 완료되면, 해당 함수의 콜백이 콜백 큐에 추가된다.
   3. 이벤트 루프 (Event Loop): 이벤트 루프는 콜 스택이 비어 있을 때 콜백 큐에 있는 작업을 콜 스택으로 이동시켜 실행시킨다.
-![Alt text](<JS engine.png>)
+![Alt text](<JavaScript 응용/JS engine.png>)
+
+- Promise: JavaScript에서 비동기 작업을 처리하는 객체
+  -  Promise는 비동기 작업의 최종 완료(또는 실패) 및 그 결과 값을 나타내며, 다음과 같이 세 가지 상태를 가진다.
+      1. pending: 비동기 처리 로직이 아직 완료되지 않은 상태
+      2. fulfilled: 비동기 처리가 완료되어 Promise가 결과 값을 반환한 상태
+      3. rejected: 비동기 처리가 실패하거나 오류가 발생한 상태
+  - Promise는 `then` 메서드를 사용하여 비동기 작업이 성공적으로 완료되었을 때의 콜백 함수를 등록할 수 있다.<br>
+  또한 `catch` 메서드를 사용하여 오류가 발생했을 때의 콜백 함수를 등록할 수 있다.
+  - 콜백 지옥(callback hell) 문제를 해결: 콜백 함수를 중첩하거나 연쇄적으로 사용할 때 발생하며 코드가 복잡하고 가독성이 떨어지며 유지보수가 어려워지는 상황
+  - 예시
+    ```javascript
+    const myPromise = new Promise((resolve, reject) => {
+      // 비동기 작업 수행 후
+      if (/* 작업이 성공했을 경우 */) {
+          resolve("성공한 결과");
+      } else {
+          reject("작업 실패");
+      }
+    });
+
+    myPromise.then(result => {
+      console.log(result); // "성공한 결과" 출력
+    }).catch(error => {
+      console.error(error); // 이 부분은 실행되지 않음
+    });
+    ```
+
+- async / await: JavaScript에서 비동기 코드를 작성할 때 사용하는 키워드
+  - async: async 키워드는 함수 앞에 위치하며, 이 함수가 비동기 함수임을 나타낸다. <br> async 함수는 항상 프로미스(Promise)를 반환한다.
+  - await: await 키워드는 async 함수 내부에서만 사용할 수 있다. <br>
+  await 뒤에 위치한 표현식은 보통 프로미스이며, JavaScript 엔진은 프로미스가 fulfilled 또는 rejected 상태가 될 때까지 함수의 실행을 일시 중지한다.
+  - 예시
+    ```javascript
+    // 비동기 함수 선언
+    async function fetchData() {
+      try {
+        // await를 사용하여 HTTP 요청의 프로미스가 완료될 때까지 기다림
+        const response = await fetch('https://api.example.com/data');
+        // 프로미스가 완료되면 JSON을 파싱
+        const data = await response.json();
+        // 데이터 처리
+        console.log(data);
+      } catch (error) {
+        // 오류 처리
+        console.error("An error occurred:", error);
+      }
+    }
+
+    // 비동기 함수 호출
+    fetchData();
+     ```
+- fetch: JavaScript에서 HTTP 요청을 보내기 위해 사용하는 내장 함수
+  - fetch 함수는 Promise 기반 API이므로 비동기적으로 작동하며, then()과 catch() 또는 async/await와 함께 사용하여 비동기 결과를 처리할 수 있다.
+  - then() / catch() 예시
+    ```javascript
+    fetch('https://api.example.com/data')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json(); 
+    })
+    .then(data => {
+      console.log(data); 
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
+    ```
+  - async/await 예시
+    ```javascript
+    async function fetchData() {
+    try {
+      const response = await fetch('https://api.example.com/data');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json(); 
+      console.log(data); 
+    } catch (error) {
+      console.error("There has been a problem with your fetch operation:", error);
+      }
+    }
+    ```
+    

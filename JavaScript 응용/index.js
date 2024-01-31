@@ -66,3 +66,65 @@ function taskA(a, b, callback) {
 
 taskA(10, 50, (result) => console.log(result));
 console.log("The end");
+
+/* -------------------- Promise -------------------- */
+function taskB(a, b) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const result = a + b;
+      if (result > 10) {
+        resolve(result);
+      } else {
+        reject("Task B Error");
+      }
+    }, 3000)
+  })
+}
+
+function taskC(a) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const result = a * a;
+    if (result > 3500) {
+      resolve(a * a);
+    }
+    else {
+      reject("Task C Error");
+    }
+  }, 3000)}
+)}
+
+taskB(2, 1).then((res) => {
+    console.log(res);
+    return taskC(res);
+  }
+).catch((res) => {
+    console.log(res);
+    return taskC(100);
+}).then((res) => {
+  console.log(res);
+}).catch((err) => {
+  console.log(err);
+})
+
+/* -------------------- async / await with fetch -------------------- */
+fetch("https://jsonplaceholder.typicode.com/comments")
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
+async function fetchComment() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/comments");
+    const data = await response.json();
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+}
