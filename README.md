@@ -327,4 +327,20 @@
     }
     ```
 
-    </detail>
+</detail>
+
+</details>
+
+<details>
+<summary>4. React.js 기초</summary>
+
+- JSX (JavaScript XML): JSX는 React에서 사용되는 템플릿 언어로, JavaScript 코드 안에서 HTML과 유사한 구조를 작성할 수 있다.
+
+- State: React 컴포넌트의 내부 상태를 나타내는 객체
+
+  - React에서 상태(State)가 변경되면, React가 자동으로 해당 컴포넌트를 다시 렌더링하고 화면을 업데이트한다.
+
+- Props: React 컴포넌트 간에 데이터를 전달하는 메커니즘
+  - 부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달할 때 사용되며, Props는 읽기 전용이다. (컴포넌트 내에서 변경할 수 없다.)
+
+</detail>
